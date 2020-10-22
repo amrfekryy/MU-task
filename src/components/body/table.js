@@ -8,6 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import fakeStudentsService from 'helpers/fakeStudentsService'
+
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
@@ -22,25 +24,8 @@ const columns = [
   // },
 ];
 
-function createData(name, status, major) {
-  return { name, status, major };
-}
 
-const rows = [
-  createData('Ahemd', 'IA', 'Medicine'),
-  createData('Ali', 'IA', 'Medicine'),
-  createData('Mohamed', 'IA', 'Engineering'),
-  createData('Amro', 'IA', 'Medicine'),
-  createData('Samy', 'IA', 'Engineering'),
-  createData('Zakaria', 'IA', 'Computer Science'),
-  createData('Ahemd', 'IA', 'Medicine'),
-  // createData('Ali', 'IA', 'Medicine'),
-  // createData('Mohamed', 'IA', 'Engineering'),
-  // createData('Amro', 'IA', 'Medicine'),
-  // createData('Samy', 'IA', 'Engineering'),
-  // createData('Zakaria', 'IA', 'Computer Science'),
-
-];
+const rows = fakeStudentsService({ count: 20 })
 
 const useStyles = makeStyles({
   root: {

@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SwipeableTemporaryDrawer() {
+export default function Sidebar() {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -47,7 +47,7 @@ export default function SwipeableTemporaryDrawer() {
             <ArrowForwardIosIcon />
             <AccountCircle />
           </ListItemIcon>
-          <ListItemText primary={'Admission Male'} />
+          <ListItemText primary={'Admission Officer'} />
         </ListItem>
       </List>
       <Divider />
