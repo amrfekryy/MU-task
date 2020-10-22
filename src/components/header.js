@@ -34,9 +34,9 @@ export default function Header() {
   // };
 
   return (
-      <AppBar position="static" color="transparent">
+      <AppBar position="static" color="#fff">
         <Toolbar 
-          // variant="dense" 
+          variant="dense" 
           style={{
             display: 'flex',
             justifyContent: 'space-between',
