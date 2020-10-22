@@ -1,7 +1,7 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import Content from './content'
+import Tabs from './tabs'
 
 export default function Body() {
   return (
@@ -10,7 +10,7 @@ export default function Body() {
       <Container fixed 
         style={{ padding: '5vh 0'}}
         >
-        <Content/>
+        <Tabs/>
       </Container>
     </React.Fragment>
   );

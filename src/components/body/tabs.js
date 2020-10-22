@@ -6,10 +6,12 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Table from './table'
+import fakeStudentsService, { statuses } from 'helpers/fakeStudentsService'
 
+const data = fakeStudentsService({ count: 200 })
 
 function TabPanel(props) {
-  const { value, index, ...other } = props;
+  const { value, index, status } = props;
 
   return (
     <div
@@ -17,10 +19,13 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`scrollable-auto-tabpanel-${index}`}
       aria-labelledby={`scrollable-auto-tab-${index}`}
-      {...other}
       // style={{ padding: '3vh 5vw'}}
     >
-      {value === index && <Table />}
+      {value === index 
+        ? status.code === 'all' 
+          ? <Table data={data}/> 
+          : <Table data={data.filter(student => student.st_code === status.code)}/>
+        : ''}
     </div>
   );
 }
@@ -29,7 +34,6 @@ function TabPanel(props) {
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    // height: '40%'
   },
 });
 
@@ -39,9 +43,7 @@ export default function CenteredTabs() {
 
   const handleChange = (event, newValue) => setValue(newValue)
 
-  const tabs = [
-    'All', 'Under Review', 'Initial Acceptance', 'Conditional Acceptance', 'Rejected'
-  ]
+  const tabs = [{full: 'All', code: 'all'}, ...statuses]
 
   return (
     <Paper className={classes.root}>
@@ -52,10 +54,10 @@ export default function CenteredTabs() {
         textColor="primary"
         centered
       >
-        {tabs.map(label => <Tab label={label} />)}
+        {tabs.map(status => <Tab label={status.full} />)}
       </Tabs>
 
-      {tabs.map( (label, index) => <TabPanel value={value} index={index} />)}
+      {tabs.map( (status, index) => <TabPanel {...{ value, index, status }}/>)}
     
     </Paper>
   );
