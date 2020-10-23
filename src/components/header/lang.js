@@ -9,7 +9,6 @@ function LangBtn(props) {
     alignItems: 'center',
     height: 20,
     width: 20,
-    lineHeight: 10,
     backgroundColor: bg,
     color: '#fff',
     fontWeight: 'bolder',
