@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-
+import Person from '@material-ui/icons/Person';
 
 const useStyles = makeStyles({
   root: {
@@ -51,6 +51,7 @@ export default function StickyHeadTable(props) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
+          
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -64,6 +65,7 @@ export default function StickyHeadTable(props) {
               ))}
             </TableRow>
           </TableHead>
+
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
@@ -72,6 +74,18 @@ export default function StickyHeadTable(props) {
                     const value = row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
+                        {column.id === 'name' && <Person 
+                          style={{
+                            color: {
+                              'ur': 'orange',
+                              'ia': 'lightgreen',
+                              'ca': 'lightgreen',
+                              'r': 'lightcoral'
+                              }[row.st_code],
+                            // fontSize: 20
+                            marginRight: 10
+                          }}
+                        />}
                         {column.format && typeof value === 'number' ? column.format(value) : value}
                       </TableCell>
                     );
@@ -80,6 +94,7 @@ export default function StickyHeadTable(props) {
               );
             })}
           </TableBody>
+        
         </Table>
       </TableContainer>
       <TablePagination
