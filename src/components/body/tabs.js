@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Table from './table'
 import fakeStudentsService, { statuses } from 'helpers/fakeStudentsService'
+import { useTranslation } from 'react-i18next';
 
 const data = fakeStudentsService({ count: 200 })
 
@@ -39,10 +40,11 @@ const useStyles = makeStyles({
 
 export default function CenteredTabs() {
   const classes = useStyles();
+  const { t } = useTranslation()
+
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => setValue(newValue)
-
+  
   const tabs = [{full: 'All', code: 'all'}, ...statuses]
 
   return (
@@ -54,7 +56,7 @@ export default function CenteredTabs() {
         textColor="primary"
         centered
       >
-        {tabs.map(status => <Tab label={status.full} />)}
+        {tabs.map(status => <Tab label={t(status.full)} />)}
       </Tabs>
 
       {tabs.map( (status, index) => <TabPanel {...{ value, index, status }}/>)}

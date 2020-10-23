@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react'
 import Header from 'components/header'
 import Body from 'components/body'
+import 'translation/i18n'
 
 function App() {
   return (
     <>
-      <Header />
-      <Body />
+      <Suspense fallback="loading">
+        <Header />
+        <Body />
+      </Suspense>
     </>
   );
 }

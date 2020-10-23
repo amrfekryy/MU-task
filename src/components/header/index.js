@@ -21,17 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
-
-
-  // const handleMenu = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
 
   return (
       <AppBar position="static" color="#fff">
@@ -51,7 +40,7 @@ export default function Header() {
             margin: '5px'
           }}/>
 
-          <SidebarBtn />          
+          <SidebarBtn anchor={'right'}/>          
 
         </Toolbar>
       </AppBar>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -14,14 +13,11 @@ import Group from '@material-ui/icons/Group';
 import EventNote from '@material-ui/icons/EventNote';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-});
+import { useTranslation } from 'react-i18next'
 
-export default function Sidebar() {
-  const classes = useStyles();
+export default function SidebarBtn(props) {
+  const { anchor } = props
+
   const [state, setState] = React.useState({
     left: false,
     right: false,
@@ -33,42 +29,6 @@ export default function Sidebar() {
     }
     setState({ ...state, [anchor]: open });
   };
-
-  const list = (anchor) => (
-    <div
-      className={classes.list}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        <ListItem button key={1}>
-          <ListItemIcon>
-            <ArrowForwardIosIcon />
-            <AccountCircle />
-          </ListItemIcon>
-          <ListItemText primary={'Admission Officer'} />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem button key={2}>
-          <ListItemIcon><Group /></ListItemIcon>
-          <ListItemText primary={'Applicants'} />
-        </ListItem>
-        <ListItem button key={3}>
-          <ListItemIcon><EventNote /></ListItemIcon>
-          <ListItemText primary={'Dates'} />
-        </ListItem>
-        <ListItem button key={4}>
-          <ListItemIcon><ExitToApp /></ListItemIcon>
-          <ListItemText primary={'Sign Out'} />
-        </ListItem>
-      </List>
-    </div>
-  );
-
-  const anchor = 'right'
 
   return (
     <div>
@@ -83,17 +43,50 @@ export default function Sidebar() {
         >
           <AccountCircle />
         </IconButton>
-      
-        <SwipeableDrawer
-          anchor={anchor}
-          open={state[anchor]}
-          onClose={toggleDrawer(anchor, false)}
-          onOpen={toggleDrawer(anchor, true)}
-        >
-          {list(anchor)}
-        </SwipeableDrawer>
-      
+
+        <Sidebar {...{state, toggleDrawer, anchor}}/>
+
       </React.Fragment>
     </div>
   );
+}
+
+function Sidebar (props) {
+  const { state, toggleDrawer, anchor } = props
+  const { t } = useTranslation()
+
+  const listItems = [
+    {label: 'Admission Officer', icon: [<ArrowForwardIosIcon />, <AccountCircle />]},
+    {divider: true},
+    {label: 'Applicants', icon: <Group />},
+    {label: 'Dates', icon: <EventNote />},
+    {label: 'Sign Out', icon: <ExitToApp />},
+  ]
+
+  return (
+    <SwipeableDrawer
+      anchor={anchor}
+      open={state[anchor]}
+      onClose={toggleDrawer(anchor, false)}
+      onOpen={toggleDrawer(anchor, true)}
+    >
+      <div
+        style={{ width: 250 }}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        <List>
+          {listItems.map((item, key) => {
+            return item.divider 
+            ? <Divider key={key+1} style={{margin: '8px 0'}} /> 
+            : <ListItem button key={key+1}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={t(item.label)} />
+              </ListItem>
+          })}
+        </List>
+      </div>
+    </SwipeableDrawer>
+  )
 }

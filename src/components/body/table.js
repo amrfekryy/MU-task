@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Person from '@material-ui/icons/Person';
+import { useTranslation } from 'react-i18next'
 
 const useStyles = makeStyles({
   root: {
@@ -47,6 +48,8 @@ export default function StickyHeadTable(props) {
   ];  
   const rows = props.data || []
 
+  const { t, i18n } = useTranslation()
+
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -60,7 +63,7 @@ export default function StickyHeadTable(props) {
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  {column.label}
+                  {t(column.label)}
                 </TableCell>
               ))}
             </TableRow>
@@ -71,22 +74,13 @@ export default function StickyHeadTable(props) {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
+                    const isNameCol = column.id === 'name'
                     const value = row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        {column.id === 'name' && <Person 
-                          style={{
-                            color: {
-                              'ur': 'orange',
-                              'ia': 'lightgreen',
-                              'ca': 'lightgreen',
-                              'r': 'lightcoral'
-                              }[row.st_code],
-                            // fontSize: 20
-                            marginRight: 10
-                          }}
-                        />}
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                        {isNameCol && <PersonIcon status_code={row.st_code} />}
+                        {isNameCol && i18n.language === 'ar' ? row.ar_name : t(value) }
+                        {/* {column.format && typeof value === 'number' ? column.format(value) : t(value)} */}
                       </TableCell>
                     );
                   })}
@@ -105,7 +99,23 @@ export default function StickyHeadTable(props) {
         page={page}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
+        labelRowsPerPage={t('Rows per page')+':'}
       />
     </Paper>
   );
+}
+
+
+function PersonIcon ({ status_code }) {
+  const style = {
+    color: {
+      'ur': 'orange',
+      'ia': 'lightgreen',
+      'ca': 'lightgreen',
+      'r': 'lightcoral'
+    }[status_code],
+    // fontSize: 20
+    marginRight: 10
+  }
+  return <Person style={style}/>
 }
