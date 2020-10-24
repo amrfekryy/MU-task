@@ -18,6 +18,7 @@ const translation = {
 "Applicants": "المتقدمين",
 "Dates": "المواعيد",
 "Sign Out": "تسجيل الخروج",
+"Click 'Applicants' in sidebar": "اضغط على 'المتقدمين' في الشريط الجانبي"
 
 }
 

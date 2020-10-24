@@ -11,17 +11,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Person from '@material-ui/icons/Person';
 import { useTranslation } from 'react-i18next'
 
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
-  container: {
-    maxHeight: '60vh',
-  },
-});
 
 export default function StickyHeadTable(props) {
-  const classes = useStyles();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -51,8 +43,8 @@ export default function StickyHeadTable(props) {
   const { t, i18n } = useTranslation()
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <Paper style={{ width: '100%' }}>
+      <TableContainer style={{ maxHeight: '60vh' }}>
         <Table stickyHeader aria-label="sticky table">
           
           <TableHead>

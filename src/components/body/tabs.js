@@ -1,18 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Table from './table'
-import fakeStudentsService, { statuses } from 'helpers/fakeStudentsService'
+import { statuses } from 'helpers/fakeStudentsService'
 import { useTranslation } from 'react-i18next';
-
-const data = fakeStudentsService({ count: 200 })
+import { connect } from 'react-redux'
 
 function TabPanel(props) {
-  const { value, index, status } = props;
+  const { value, index, status, students } = props;
+  const { t } = useTranslation()
 
   return (
     <div
@@ -23,23 +20,21 @@ function TabPanel(props) {
       // style={{ padding: '3vh 5vw'}}
     >
       {value === index 
-        ? status.code === 'all' 
-          ? <Table data={data}/> 
-          : <Table data={data.filter(student => student.st_code === status.code)}/>
+        ? students
+          ? status.code === 'all' 
+            ? <Table data={students}/> 
+            : <Table data={students.filter(student => student.st_code === status.code)}/>
+          : <div style={{ padding: '20px', textAlign: 'center'}}> 
+              {t("Click 'Applicants' in sidebar")} </div>
         : ''}
     </div>
   );
 }
 
+const TabPanel_ = connect(state => ({ students: state.students.data }), null)(TabPanel)
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-});
 
 export default function CenteredTabs() {
-  const classes = useStyles();
   const { t } = useTranslation()
 
   const [value, setValue] = React.useState(0);
@@ -48,7 +43,7 @@ export default function CenteredTabs() {
   const tabs = [{full: 'All', code: 'all'}, ...statuses]
 
   return (
-    <Paper className={classes.root}>
+    <Paper style={{ flexGrow: 1 }}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -59,7 +54,7 @@ export default function CenteredTabs() {
         {tabs.map(status => <Tab label={t(status.full)} />)}
       </Tabs>
 
-      {tabs.map( (status, index) => <TabPanel {...{ value, index, status }}/>)}
+      {tabs.map( (status, index) => <TabPanel_ {...{ value, index, status }}/>)}
     
     </Paper>
   );
