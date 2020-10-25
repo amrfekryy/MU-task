@@ -3,7 +3,7 @@ import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Sidebar from './sidebar'
-
+import controls from 'styles/_controls.scss'
 
 export default function SidebarBtn(props) {
   const { anchor } = props
@@ -29,9 +29,8 @@ export default function SidebarBtn(props) {
             aria-controls="menu-appbar"
             aria-haspopup="true"
             onClick={toggleDrawer(anchor, true)}
-            color="inherit"
         >
-          <AccountCircle />
+          <AccountCircle style={{ color: controls['sidebar-color'] }}/>
         </IconButton>
 
         <Sidebar {...{state, toggleDrawer, anchor}}/>

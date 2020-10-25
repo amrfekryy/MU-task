@@ -6,6 +6,7 @@ import Table from './table'
 import { statuses } from 'helpers/fakeStudentsService'
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
+import controls from 'styles/_controls.scss'
 
 function TabPanel(props) {
   const { value, index, status, students } = props;
@@ -47,9 +48,9 @@ export default function CenteredTabs() {
       <Tabs
         value={value}
         onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
         centered
+        className='tabs'
+        TabIndicatorProps={{style: {background: controls['tabs-color']}}}
       >
         {tabs.map(status => <Tab label={t(status.full)} />)}
       </Tabs>

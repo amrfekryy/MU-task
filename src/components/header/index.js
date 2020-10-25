@@ -23,7 +23,7 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-      <AppBar position="static" color="#fff">
+      <AppBar className='header' position="static" color="#fff">
         <Toolbar 
           variant="dense" 
           style={{

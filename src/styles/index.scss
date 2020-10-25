@@ -1,0 +1,26 @@
+@import '_controls.scss';
+
+body {
+  margin: 0;
+  font-family: $main-font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fafafa;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.header {
+  font-family: $header-font;
+}
+
+.sidebar {
+  font-family: $sidebar-font;
+}
+
+.tabs {
+  color: $tabs-color;
+}

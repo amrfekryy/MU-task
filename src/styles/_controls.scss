@@ -1,0 +1,21 @@
+
+// these are controls to change colors and fonts across application
+
+// global controls that impacts the whole app
+$main-font: "Roboto", "Helvetica", "Arial", sans-serif;  // try cursive
+$main-color: #3F51B5; 
+$main-font-size: 14;
+
+// custom controls
+$header-font: $main-font; // change to customize header font
+$sidebar-font: $main-font; // change to customize sidebar font
+$sidebar-color: $main-color; // change to customize sidebar color
+$tabs-color: $main-color; // change to customize tabs color
+
+:export {
+  main-font: $main-font;
+  sidebar-color: $main-color;
+  tabs-color: $tabs-color;
+  main-font-size: $main-font-size;
+}
+

@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import fakeStudentsService from 'helpers/fakeStudentsService'
 import { connect } from 'react-redux'
 import { mapDispatchToProps } from 'redux/tools'
+import controls from 'styles/_controls.scss'
 
 function Sidebar (props) {
   const { state, toggleDrawer, anchor } = props
@@ -24,11 +25,11 @@ function Sidebar (props) {
   }
 
   const listItems = [
-    {label: 'Admission Officer', icon: [<ArrowForwardIosIcon />, <AccountCircle />]},
+    {label: 'Admission Officer', icons: [ArrowForwardIosIcon, AccountCircle]},
     {divider: true},
-    {label: 'Applicants', icon: <Group />, onClick: handleApplicantsClick},
-    {label: 'Dates', icon: <EventNote />},
-    {label: 'Sign Out', icon: <ExitToApp />},
+    {label: 'Applicants', icons: [Group], onClick: handleApplicantsClick},
+    {label: 'Dates', icons: [EventNote]},
+    {label: 'Sign Out', icons: [ExitToApp]},
   ]
 
   return (
@@ -46,11 +47,12 @@ function Sidebar (props) {
       >
         <List>
           {listItems.map((item, key) => {
-            return item.divider 
-            ? <Divider key={key+1} style={{margin: '8px 0'}} /> 
-            : <ListItem button key={key+1} onClick={item.onClick || ''}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={t(item.label)} />
+            if (item.divider) return <Divider key={key+1} style={{margin: '8px 0'}} /> 
+            const icons = item.icons.map( Icon => <Icon style={{color: controls['sidebar-color']}} /> )
+
+            return <ListItem button key={key+1} onClick={item.onClick || ''}>
+              <ListItemIcon>{icons}</ListItemIcon>
+                <ListItemText primary={t(item.label)} disableTypography className='sidebar'/>
               </ListItem>
           })}
         </List>
@@ -58,13 +60,5 @@ function Sidebar (props) {
     </SwipeableDrawer>
   )
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     users: state.usersReducer.data,
-//     tasks: state.tasksReducer.data,
-//     subTasks: state.subTasksReducer.data
-//   }
-// }
 
 export default connect(null, mapDispatchToProps)(Sidebar)
