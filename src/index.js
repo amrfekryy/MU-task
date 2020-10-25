@@ -20,7 +20,9 @@ const THEME = createMuiTheme({
 
 ReactDOM.render(
   <ThemeProvider theme={THEME}>
-    <Provider store={store}> <App /> </Provider>
+    <Provider store={store}> 
+      <App /> 
+    </Provider>
   </ThemeProvider>,
   document.getElementById('root')
 )

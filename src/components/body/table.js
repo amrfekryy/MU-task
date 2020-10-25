@@ -30,13 +30,6 @@ export default function StickyHeadTable(props) {
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'status', label: 'Status', minWidth: 100 },
     { id: 'major', label: 'Major', minWidth: 100 },
-    // {
-    //   id: 'density',
-    //   label: 'Density',
-    //   minWidth: 170,
-    //   align: 'right',
-    //   format: (value) => value.toFixed(2),
-    // },
   ];  
   const rows = props.data || []
 
@@ -52,7 +45,7 @@ export default function StickyHeadTable(props) {
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  align={column.align}
+                  // align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
                   {t(column.label)}

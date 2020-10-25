@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import logo from 'assets/logo.png'
@@ -7,20 +6,8 @@ import logo from 'assets/logo.png'
 import SidebarBtn from './sidebar'
 import LangBtns from './lang'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
 
 export default function Header() {
-  const classes = useStyles();
 
   return (
       <AppBar className='header' position="static" color="#fff">
@@ -29,7 +16,6 @@ export default function Header() {
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            // padding: '5px'
           }}
         >
           
